@@ -9,19 +9,35 @@
 </template>
 
 <script>
+import {mapState,mapMutations} from 'vuex';
 import axios from 'axios'
 export default {
-    data(){
-        return {
-            info: {}
-        }
+    computed:{
+        ...mapState({
+            info:state=>state.info
+        })
+    },
+    methods:{
+        ...mapMutations({
+            getDetail:'getDetail',
+            favor:'favor'
+        })
     },
     async created(){
-        let id = this.$route.params.id;
-        // 调用获取详情接口
-        let data = await axios.get(`/api/detail?id=${id}`)
-        this.info = data.data;
-        console.log('data...', data);
-    }    
+        let id= this.$route.params.id;
+        this.getDetail(id)
+    }
+    // data(){
+    //     return {
+    //         info: {}
+    //     }
+    // },
+    // async created(){
+    //     let id = this.$route.params.id;
+    //     // 调用获取详情接口
+    //     let data = await axios.get(`/api/detail?id=${id}`)
+    //     this.info = data.data;
+    //     console.log('data...', data);
+    // }    
 }
 </script>

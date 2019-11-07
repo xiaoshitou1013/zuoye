@@ -11,9 +11,24 @@ export default new Vuex.Store({
     info: {}
   },
   mutations: {
-    updateList(state, list){
-      state.list = list;
+    updateList(state, payload){
+      state.list = payload;
+    },
+    getDetail(state,payload){
+      let info ={}
+      let index=state.list.findIndex(item=>item.id==payload);
+      if(index !==-1){
+        info=state.list[index];
+      }
+      state.info=info;
+    },
+    favor(state,payload){
+      let index = state.list.findIndex(item=>item.id==payload)
+      let info = {...state.list[index]};
+      info.favor++;
+      state.list[index] = info
     }
+    
   },
   actions: {
     async getList({state, commit}, {type, page}){
@@ -28,9 +43,6 @@ export default new Vuex.Store({
           commit('updateList', [...state.list, ...data.data])
           // this.list = [...this.list, ...data.data];
       }
-    },
-    async getDetail(){
-
     }
   },
   modules: {
