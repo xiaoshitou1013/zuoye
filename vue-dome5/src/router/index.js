@@ -7,6 +7,7 @@ import 'nprogress/nprogress.css';
 import Home from '../views/home/index.vue'
 import Login from '../views/login.vue'
 import Register from '../views/register.vue'
+import Post from '../views/post.vue'
 
 // 二级路由
 import Timeline from '../views/home/timeline'
@@ -15,53 +16,35 @@ import My from '../views/home/my'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',  // 首页重定向到圈子
-    name: 'home',
-    redirect: '/home/timeline'
+  // 首页重定向到圈子
+  {path: '/',  name: 'home',redirect: '/home/timeline'},
+  // 登陆页面
+  {path: '/login',component: Login},
+  // 发送朋友圈
+  {path: '/post',component: Post},
+  // 注册页面
+  {path: '/register',component: Register},
+  // 收藏页面
+  {path: '/favor',component: null},
+  // 更改密码
+  {path: '/modify',component: null},
+  // 个人信息
+  {path: '/info',component: null},
+  // 首页
+  {path: '/home',component: Home,
+    // 圈子
+    children: [{path: '/home/timeline',component: Timeline},
+    // 我的
+    {path: '/home/my',component: My}]
   },
-  {
-    path: '/login', // 登陆页面
-    component: Login
+  // 评论
+  {path: '/comment',component: null,
+  // 收到的评论
+    children: [{path: '/comment/receive',component: null},
+    //发出的评论
+    {path: '/comment/send',component: null}]
   },
-  {
-    path: '/register',  // 注册页面
-    component: Register
-  },
-  {
-    path: '/favor', // 收藏页面
-    component: null
-  },
-  {
-    path: '/modify',  // 更改密码
-    component: null
-  },
-  {
-    path: '/info',  // 个人信息
-    component: null
-  },
-  {
-    path: '/home',  // 首页
-    component: Home,
-    children: [{
-      path: '/home/timeline', // 圈子
-      component: Timeline
-    },{
-      path: '/home/my', // 我的
-      component: My
-    }]
-  },
-  {
-    path: '/comment', // 评论
-    component: null,
-    children: [{
-      path: '/comment/receive', // 收到的评论
-      component: null
-    },{
-      path: '/comment/send',  //发出的评论
-      component: null
-    }]
-  }
+  
 ]
 
 const router = new VueRouter({
