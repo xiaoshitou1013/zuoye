@@ -3,9 +3,9 @@ import { connect } from 'dva';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import styles from './IndexPage.scss';
 // 引入自定义菜单
-import MyMenu from '../components/MyMenu';
+import MyMenu from '@/components/MyMenu';
 // 引入封装路由
-import RouterView from '../routes/RouterView'
+import RouterView from '@/routes/RouterView'
 
 const { Header, Content, Sider } = Layout;
 
@@ -30,15 +30,8 @@ class IndexPage extends React.Component{
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
-            <Content className={styles.content}
-              style={{
-                background: '#fff',
-                padding: 24,
-                margin: 0,
-                minHeight: 280,
-              }}
-            >
-              <p className='sider content'>Content</p>
+            <Content className={styles.content}>
+              {/* <p className='sider content'>Content</p> */}
 
               <RouterView routes={this.props.routes}/>
             </Content>
